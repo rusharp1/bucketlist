@@ -1,0 +1,102 @@
+<!--
+  Hit RUN to see this project in action!
+  
+  This project will auto-refresh as you edit the HTML, CSS and JS. See README.md for more info (including how to disable auto-refresh and install packages).
+-->
+
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <!-- 브라우저 제목표시줄 및 페이지 탭에 노출됨 -->
+    <title>2024 나만의 신년 계획</title>
+    <link href="style.css" rel="stylesheet" type="text/css" />
+    <!-- style 안에 쓸때는 을 꼭 사용해야 함.-->
+    <style> 
+      @import url("https://fonts.googleapis.com/css2?family=Hahmlet:wght@300&display=swap");
+      * {
+        font-family: "hahmlet", serif;
+      }
+      .bg {
+        background-image: url('https://s3.ap-northeast-2.amazonaws.com/materials.spartacodingclub.kr/bucketList/bg-grid.png');
+        background-position: center;
+        background-size: cover;
+        margin: auto;
+        width: 360px;
+      }
+      .title {
+          background-color: tomato;
+          border-radius: 10px;
+          padding: 4px 14px;
+          color: white;
+      }
+      .bucket{
+        width: 160px;
+        height: 160px;
+        text-align: center;
+        background-size: cover;        
+      }
+      .img1{
+        background-image: url('https://s3.ap-northeast-2.amazonaws.com/materials.spartacodingclub.kr/bucketList/bucket-red.png');
+      }
+      .img2{
+        background-image: url('https://s3.ap-northeast-2.amazonaws.com/materials.spartacodingclub.kr/bucketList/bucket-lightred.png');
+      }
+    </style>
+    <link rel="stylesheet" type="text/css" href="https://s3.ap-northeast-2.amazonaws.com/materials.spartacodingclub.kr/bucketList/sparta-bucketlist.css"/>
+  </head>
+
+  <body class="bg">
+    <!--섹션, 문단의 제목, 숫자가 작을수록 글자의 크기가 커짐. (높은 등급)-->
+    <h1 class="title">2024년 신년계획</h1>
+    <!-- paragraph, 즉 문단의 약자로, 하나의 문단을 만들 때 쓰임 -->
+    <p class="msg center">
+      올해 안에 3가지를 달성하지 못할 경우,
+    </p> 
+      <p class="msg center">
+      OOO을 하겠습니다.
+    </p>
+
+    <!--division 으로, 레이아웃을 나누는 데 주로 사용됨-->
+    <div class="flex-row wrap">
+      <div class = "bucket img1 center">취업하기</div>
+      <div class = "bucket img2 center">자격증 따기</div>
+      <div class = "bucket img2 center">다이어트 하기</div>
+      <div class = "bucket img1 center">운동 하기</div>
+      <div class = "bucket img1 center">해외여행 가기</div>
+      <div class = "bucket img2 center">인맥 쌓기</div>
+    </div>
+
+
+    
+    <script>
+        // 페이지 로드 시 이전 상태 복원
+        document.addEventListener("DOMContentLoaded", (event) => {
+            const buckets = document.querySelectorAll(".bucket");
+            buckets.forEach((bucket, index) => {
+                // 로컬 스토리지에서 상태 읽기
+                const isDone = localStorage.getItem("bucket" + index) === "done";
+                if (isDone) {
+                    bucket.classList.add("done");
+                }
+            });
+        });
+
+        // 버킷 리스트 클릭 이벤트
+        const buckets = document.querySelectorAll(".bucket");
+        buckets.forEach((bucket, index) => {
+            bucket.addEventListener("click", function () {
+                // 클래스 토글 (완료 도장)
+                bucket.classList.toggle("done");
+
+                // 로컬 스토리지에 상태 저장
+                if (bucket.classList.contains("done")) {
+                    localStorage.setItem("bucket" + index, "done");
+                } else {
+                    localStorage.setItem("bucket" + index, "");
+                }
+            });
+        });
+    </script>
+</html>
